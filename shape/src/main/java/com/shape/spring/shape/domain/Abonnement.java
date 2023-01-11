@@ -2,11 +2,14 @@ package com.shape.spring.shape.domain;
 
 import java.io.Serializable;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -20,6 +23,12 @@ public class Abonnement implements Serializable {
 	@Column(name = "ABONNEMENT_TYPE")
 	private String abonnement_type;
 	
+	//ASSOCIATION
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_utilisateur")
+	private Utilisateur utilisateur;
+	
 	// GETTER
 	
 	public Long getId_abonnement() {
@@ -27,6 +36,10 @@ public class Abonnement implements Serializable {
 	}
 	public String getAbonnement_type() {
 		return abonnement_type;
+	}
+	
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
 	}
 	
 	// SETTER
@@ -38,16 +51,25 @@ public class Abonnement implements Serializable {
 		this.abonnement_type = abonnement_type;
 	}
 	
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
+	}
+	
 	// CONSTRUCTEUR
 	
 	public Abonnement() {
 		super();
 	}
-	public Abonnement(Long id_abonnement, String abonnement_type) {
+	public Abonnement(Long id_abonnement, String abonnement_type, Utilisateur utilisateur) {
 		super();
 		this.id_abonnement = id_abonnement;
 		this.abonnement_type = abonnement_type;
+		this.utilisateur = utilisateur;
 	}
+	
+	
+	
+	
 	
 	
 

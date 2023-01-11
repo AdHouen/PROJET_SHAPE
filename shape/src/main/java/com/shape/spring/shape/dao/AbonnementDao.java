@@ -26,7 +26,7 @@ public class AbonnementDao {
 	}
 	
 	// get un Abonnement by ID
-	public Abonnement getGallerieByID(Long id_abonnement) {
+	public Abonnement getAbonnementByID(Long id_abonnement) {
 		return abonnementRepository.findById(id_abonnement).get();
 	}
 	

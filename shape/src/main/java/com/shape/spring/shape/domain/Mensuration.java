@@ -1,18 +1,16 @@
 package com.shape.spring.shape.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 
@@ -32,10 +30,8 @@ public class Mensuration implements Serializable{
 	
 	//ASSOCIATION
 	
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinTable(name = "Mensuration_Statistique", joinColumns = @JoinColumn(name = "id_mensuration"), inverseJoinColumns = @JoinColumn(name ="id_statistique"))
-	private List<Statistique> statistiques;
-	
+	@OneToMany(mappedBy = "id_mensuration", fetch = FetchType.LAZY)
+	private List<Mesure> mesures = new ArrayList<>();	
 	//GETTER 
 	
 	public Long getId_mensuration() {
@@ -49,11 +45,12 @@ public class Mensuration implements Serializable{
 	public String getMensuration_unite() {
 		return mensuration_unite;
 	}
-
-	public List<Statistique> getStatistiques() {
-		return statistiques;
-	}
 	
+	public List<Mesure> getMesures() {
+		return mesures;
+	}
+
+		
 	//SETTER
 	
 	public void setId_mensuration(Long id_mensuration) {
@@ -67,25 +64,33 @@ public class Mensuration implements Serializable{
 	public void setMensuration_unite(String mensuration_unite) {
 		this.mensuration_unite = mensuration_unite;
 	}
-
-	public void setStatistiques(List<Statistique> statistiques) {
-		this.statistiques = statistiques;
-	}
 	
+	public void setMesures(List<Mesure> mesures) {
+		this.mesures = mesures;
+	}
+
+		
 	//CONSTRUCTEUR
 	
 	public Mensuration() {
 		super();
 	}
 
-	public Mensuration(Long id_mensuration, String mensuration_nom, String mensuration_unite,
-			List<Statistique> statistiques) {
+	public Mensuration(Long id_mensuration, String mensuration_nom, String mensuration_unite, List<Mesure> mesures) {
 		super();
 		this.id_mensuration = id_mensuration;
 		this.mensuration_nom = mensuration_nom;
 		this.mensuration_unite = mensuration_unite;
-		this.statistiques = statistiques;
+		this.mesures = mesures;
 	}
+	
+	
+
+	
+
+	
+
+	
 	
 	
 	

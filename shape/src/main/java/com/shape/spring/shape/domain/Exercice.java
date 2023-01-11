@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -11,6 +12,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -34,17 +36,14 @@ public class Exercice implements Serializable{
 	
 	// ASSOCIATION
 		
-	@ManyToMany (fetch = FetchType.LAZY, mappedBy = "produitAppros")
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinTable(name = "Entrainement_Exercice", joinColumns = @JoinColumn(name = "id_exercice"), inverseJoinColumns = @JoinColumn(name = "id_entrainement"))
 	private List<Entrainement> entrainements = new ArrayList<>();
-
+	
 	@ManyToOne
 	@JoinColumn(name="id_muscle")
 	private Muscle muscle;
 	
-	@ManyToOne
-	@JoinColumn(name="id_programme")
-	private Programme programme;
-
 	//GETTER
 	
 	public Long getId_exercice() {
@@ -71,10 +70,6 @@ public class Exercice implements Serializable{
 		return muscle;
 	}
 
-	public Programme getProgramme() {
-		return programme;
-	}
-	
 	//SETTER
 	
 	public void setId_exercice(Long id_exercice) {
@@ -101,10 +96,6 @@ public class Exercice implements Serializable{
 		this.muscle = muscle;
 	}
 
-	public void setProgramme(Programme programme) {
-		this.programme = programme;
-	}
-	
 	//CONSTRUTEUR
 
 	public Exercice() {
@@ -112,7 +103,7 @@ public class Exercice implements Serializable{
 	}
 
 	public Exercice(Long id_exercice, String exercice_nom, String exercice_description, String exercice_photo,
-			List<Entrainement> entrainements, Muscle muscle, Programme programme) {
+			List<Entrainement> entrainements, Muscle muscle) {
 		super();
 		this.id_exercice = id_exercice;
 		this.exercice_nom = exercice_nom;
@@ -120,8 +111,10 @@ public class Exercice implements Serializable{
 		this.exercice_photo = exercice_photo;
 		this.entrainements = entrainements;
 		this.muscle = muscle;
-		this.programme = programme;
 	}
+	
+	
+
 	
 	
 	

@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.shape.spring.shape.dao.MensurationDao;
-import com.xprod.spring.xprod.dao.ProduitDao;
-import com.xprod.spring.xprod.domain.Produit;
+import com.shape.spring.shape.domain.Mensuration;
+
 
 @RestController
 @RequestMapping
@@ -27,56 +27,56 @@ public class MensurationController {
 	@Autowired
 	MensurationDao mensurationDao;
 	
-	@GetMapping("/produits")
-	public List<Produit> getAllProduits(@Validated @RequestBody(required = false) Produit produit) {
-		return produitDao.getProduits();
+	@GetMapping("/mensurations")
+	public List<Mensuration> getAllMensurations(@Validated @RequestBody(required = false) Mensuration mensuration) {
+		return mensurationDao.getMensurations();
 		
 	}
 	
-	@PostMapping("/produits")
-	public Produit createProduit(@Validated @RequestBody(required = false) Produit produit) {
-		return produitDao.saveProduit(produit);
+	@PostMapping("/mensurations")
+	public Mensuration createMensuration(@Validated @RequestBody(required = false) Mensuration mensuration) {
+		return mensurationDao.saveMensuration(mensuration);
 		
 	}
 	
-	@GetMapping("/produits/{idProduit}")
-	public ResponseEntity findProduitById(@PathVariable(name = "idProduit")Long idProduit){
-		if (idProduit == null) {
-			return ResponseEntity.badRequest().body("Je ne trouve pas le produit avec son ID");
+	@GetMapping("/mensurations/{id_mensuration}")
+	public ResponseEntity findMensurationById(@PathVariable(name = "id_mensuration")Long id_mensuration){
+		if (id_mensuration == null) {
+			return ResponseEntity.badRequest().body("Je ne trouve pas la mensuration avec son ID");
 		}
 		
-		Produit produit = produitDao.getProduitByID(idProduit);
+		Mensuration mensuration = mensurationDao.getMensurationByID(id_mensuration);
 		
-		if (produit == null) {
-			return ResponseEntity.notFound().build();
+		if (mensuration == null) {
+			return ResponseEntity.notFound().build(); 
 		}
 		
-		return ResponseEntity.ok().body(produit); 
+		return ResponseEntity.ok().body(mensuration); 
 		
 	}
 	
-	@PutMapping("/produits/{idProduit}")
-	public ResponseEntity<Produit> updateProduit (@Validated @PathVariable(name = "idProduit")Long idProduit, @RequestBody(required = false) Produit produit) {
-		if (produit == null) {
+	@PutMapping("/mensurations/{id_mensuration}")
+	public ResponseEntity<Mensuration> updateMensuration (@Validated @PathVariable(name = "id_mensuration")Long id_mensuration, @RequestBody(required = false) Mensuration mensuration) {
+		if (mensuration == null) {
 			return ResponseEntity.notFound().build();
 			
 		}
-		produit.setIdProduit(idProduit);
-		produitDao.updateProduit(produit);
-		return ResponseEntity.ok().body(produit);
+		mensuration.setId_mensuration(id_mensuration);
+		mensurationDao.updateMensuration(mensuration);
+		return ResponseEntity.ok().body(mensuration);
 	}
 	
-	@DeleteMapping("/produits/{idProduit}")
-	public ResponseEntity<Produit> deleteProduit (@Validated @PathVariable(name = "idProduit")Long idProduit) {
+	@DeleteMapping("/mensurations/{id_mensuration}")
+	public ResponseEntity<Mensuration> deleteMensuration (@Validated @PathVariable(name = "id_mensuration")Long id_mensuration) {
 		
-		Produit produit = produitDao.getProduitByID(idProduit);
+		Mensuration mensuration = mensurationDao.getMensurationByID(id_mensuration);
 		
-		if (produit == null) {
+		if (mensuration == null) {
 			return ResponseEntity.notFound().build();
 		
 	}
-		produitDao.deleteProduit(produit);
-		return ResponseEntity.ok().body(produit); 
+		mensurationDao.deleteMensuration(mensuration);
+		return ResponseEntity.ok().body(mensuration); 
 	
 	}
 	

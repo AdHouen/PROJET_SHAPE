@@ -16,8 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.shape.spring.shape.dao.ProgrammeDao;
-import com.xprod.spring.xprod.dao.ProduitDao;
-import com.xprod.spring.xprod.domain.Produit;
+import com.shape.spring.shape.domain.Programme;
 
 @RestController
 @RequestMapping
@@ -27,56 +26,56 @@ public class ProgrammeController {
 	@Autowired
 	ProgrammeDao programmeDao;
 	
-	@GetMapping("/produits")
-	public List<Produit> getAllProduits(@Validated @RequestBody(required = false) Produit produit) {
-		return produitDao.getProduits();
+	@GetMapping("/programmes")
+	public List<Programme> getAllProgrammes(@Validated @RequestBody(required = false) Programme programme) {
+		return programmeDao.getProgrammes();
 		
 	}
 	
-	@PostMapping("/produits")
-	public Produit createProduit(@Validated @RequestBody(required = false) Produit produit) {
-		return produitDao.saveProduit(produit);
+	@PostMapping("/programmes")
+	public Programme createProgramme(@Validated @RequestBody(required = false) Programme programme) {
+		return programmeDao.saveProgramme(programme);
 		
 	}
 	
-	@GetMapping("/produits/{idProduit}")
-	public ResponseEntity findProduitById(@PathVariable(name = "idProduit")Long idProduit){
-		if (idProduit == null) {
-			return ResponseEntity.badRequest().body("Je ne trouve pas le produit avec son ID");
+	@GetMapping("/programmes/{id_programme}")
+	public ResponseEntity findProgrammeById(@PathVariable(name = "id_programme")Long id_programme){
+		if (id_programme == null) {
+			return ResponseEntity.badRequest().body("Je ne trouve pas le programme avec son ID");
 		}
 		
-		Produit produit = produitDao.getProduitByID(idProduit);
+		Programme programme = programmeDao.getProgrammeByID(id_programme);
 		
-		if (produit == null) {
-			return ResponseEntity.notFound().build();
+		if (programme == null) {
+			return ResponseEntity.notFound().build(); 
 		}
 		
-		return ResponseEntity.ok().body(produit); 
+		return ResponseEntity.ok().body(programme); 
 		
 	}
 	
-	@PutMapping("/produits/{idProduit}")
-	public ResponseEntity<Produit> updateProduit (@Validated @PathVariable(name = "idProduit")Long idProduit, @RequestBody(required = false) Produit produit) {
-		if (produit == null) {
+	@PutMapping("/programmes/{id_programme}")
+	public ResponseEntity<Programme> updateProgramme (@Validated @PathVariable(name = "id_programme")Long id_programme, @RequestBody(required = false) Programme programme) {
+		if (programme == null) {
 			return ResponseEntity.notFound().build();
 			
 		}
-		produit.setIdProduit(idProduit);
-		produitDao.updateProduit(produit);
-		return ResponseEntity.ok().body(produit);
+		programme.setId_programme(id_programme);
+		programmeDao.updateProgramme(programme);
+		return ResponseEntity.ok().body(programme);
 	}
 	
-	@DeleteMapping("/produits/{idProduit}")
-	public ResponseEntity<Produit> deleteProduit (@Validated @PathVariable(name = "idProduit")Long idProduit) {
+	@DeleteMapping("/programmes/{id_programme}")
+	public ResponseEntity<Programme> deleteProgramme (@Validated @PathVariable(name = "id_programme")Long id_programme) {
 		
-		Produit produit = produitDao.getProduitByID(idProduit);
+		Programme programme = programmeDao.getProgrammeByID(id_programme);
 		
-		if (produit == null) {
+		if (programme == null) {
 			return ResponseEntity.notFound().build();
 		
 	}
-		produitDao.deleteProduit(produit);
-		return ResponseEntity.ok().body(produit); 
+		programmeDao.deleteProgramme(programme);
+		return ResponseEntity.ok().body(programme); 
 	
 	}
 	

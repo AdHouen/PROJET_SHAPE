@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.shape.spring.shape.dao.MuscleDao;
-import com.xprod.spring.xprod.dao.ProduitDao;
-import com.xprod.spring.xprod.domain.Produit;
+import com.shape.spring.shape.domain.Muscle;
+
 
 @RestController
 @RequestMapping
@@ -27,56 +27,56 @@ public class MuscleController {
 	@Autowired
 	MuscleDao muscleDao;
 	
-	@GetMapping("/produits")
-	public List<Produit> getAllProduits(@Validated @RequestBody(required = false) Produit produit) {
-		return produitDao.getProduits();
+	@GetMapping("/muscles")
+	public List<Muscle> getAllMuscles(@Validated @RequestBody(required = false) Muscle muscle) {
+		return muscleDao.getMuscles();
 		
 	}
 	
-	@PostMapping("/produits")
-	public Produit createProduit(@Validated @RequestBody(required = false) Produit produit) {
-		return produitDao.saveProduit(produit);
+	@PostMapping("/muscles")
+	public Muscle createMuscle(@Validated @RequestBody(required = false) Muscle muscle) {
+		return muscleDao.saveMuscle(muscle);
 		
 	}
 	
-	@GetMapping("/produits/{idProduit}")
-	public ResponseEntity findProduitById(@PathVariable(name = "idProduit")Long idProduit){
-		if (idProduit == null) {
-			return ResponseEntity.badRequest().body("Je ne trouve pas le produit avec son ID");
+	@GetMapping("/muscles/{id_muscle}")
+	public ResponseEntity findMuscleById(@PathVariable(name = "id_muscle")Long id_muscle){
+		if (id_muscle == null) {
+			return ResponseEntity.badRequest().body("Je ne trouve pas le muscle avec son ID");
 		}
 		
-		Produit produit = produitDao.getProduitByID(idProduit);
+		Muscle muscle = muscleDao.getMuscleByID(id_muscle);
 		
-		if (produit == null) {
-			return ResponseEntity.notFound().build();
+		if (muscle == null) {
+			return ResponseEntity.notFound().build(); 
 		}
 		
-		return ResponseEntity.ok().body(produit); 
+		return ResponseEntity.ok().body(muscle); 
 		
 	}
 	
-	@PutMapping("/produits/{idProduit}")
-	public ResponseEntity<Produit> updateProduit (@Validated @PathVariable(name = "idProduit")Long idProduit, @RequestBody(required = false) Produit produit) {
-		if (produit == null) {
+	@PutMapping("/muscles/{id_muscle}")
+	public ResponseEntity<Muscle> updateMuscle (@Validated @PathVariable(name = "id_muscle")Long id_muscle, @RequestBody(required = false) Muscle muscle) {
+		if (muscle == null) {
 			return ResponseEntity.notFound().build();
 			
 		}
-		produit.setIdProduit(idProduit);
-		produitDao.updateProduit(produit);
-		return ResponseEntity.ok().body(produit);
+		muscle.setId_muscle(id_muscle);
+		muscleDao.updateMuscle(muscle);
+		return ResponseEntity.ok().body(muscle);
 	}
 	
-	@DeleteMapping("/produits/{idProduit}")
-	public ResponseEntity<Produit> deleteProduit (@Validated @PathVariable(name = "idProduit")Long idProduit) {
+	@DeleteMapping("/muscles/{id_muscle}")
+	public ResponseEntity<Muscle> deleteMuscle (@Validated @PathVariable(name = "id_muscle")Long id_muscle) {
 		
-		Produit produit = produitDao.getProduitByID(idProduit);
+		Muscle muscle = muscleDao.getMuscleByID(id_muscle);
 		
-		if (produit == null) {
+		if (muscle == null) {
 			return ResponseEntity.notFound().build();
 		
 	}
-		produitDao.deleteProduit(produit);
-		return ResponseEntity.ok().body(produit); 
+		muscleDao.deleteMuscle(muscle);
+		return ResponseEntity.ok().body(muscle); 
 	
 	}
 	

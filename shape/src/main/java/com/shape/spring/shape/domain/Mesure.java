@@ -11,7 +11,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 
@@ -31,12 +30,12 @@ public class Mesure implements Serializable{
 	
 	// ASSOCIATION
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="id_mensuration")
-	private Mensuration mensuration;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_utilisateur")
+	private Utilisateur utilisateur;
 	
 	//GETTER
-	
+
 	public Long getId_mesure() {
 		return id_mesure;
 	}
@@ -48,10 +47,10 @@ public class Mesure implements Serializable{
 	public float getMesure_valeur() {
 		return mesure_valeur;
 	}
-
-	public Mensuration getMensuration() {
-		return mensuration;
-	}	
+	
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
+	}
 	
 	//SETTER
 	
@@ -66,9 +65,9 @@ public class Mesure implements Serializable{
 	public void setMesure_valeur(float mesure_valeur) {
 		this.mesure_valeur = mesure_valeur;
 	}
-
-	public void setMensuration(Mensuration mensuration) {
-		this.mensuration = mensuration;
+	
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
 	}
 	
 	//CONSTRUCTEUR
@@ -77,13 +76,15 @@ public class Mesure implements Serializable{
 		super();
 	}
 
-	public Mesure(Long id_mesure, LocalDate mesure_date, float mesure_valeur, Mensuration mensuration) {
+	public Mesure(Long id_mesure, LocalDate mesure_date, float mesure_valeur, Utilisateur utilisateur) {
 		super();
 		this.id_mesure = id_mesure;
 		this.mesure_date = mesure_date;
 		this.mesure_valeur = mesure_valeur;
-		this.mensuration = mensuration;
+		this.utilisateur = utilisateur;
 	}
+
+	
 	
 
 }

@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.shape.spring.shape.dao.UtilisateurDao;
-import com.xprod.spring.xprod.dao.ProduitDao;
-import com.xprod.spring.xprod.domain.Produit;
+import com.shape.spring.shape.domain.Utilisateur;
+
 
 @RestController
 @RequestMapping
@@ -25,58 +25,58 @@ import com.xprod.spring.xprod.domain.Produit;
 public class UtilisateurController {
 	
 	@Autowired
-	UtilisateurDao utilisateurDao;
+	UtilisateurDao utilisateurDao; 
 	
-	@GetMapping("/produits")
-	public List<Produit> getAllProduits(@Validated @RequestBody(required = false) Produit produit) {
-		return produitDao.getProduits();
+	@GetMapping("/utilisateurs")
+	public List<Utilisateur> getAllUtilisateurs(@Validated @RequestBody(required = false) Utilisateur utilisateur) {
+		return utilisateurDao.getUtilisateurs();
 		
 	}
 	
-	@PostMapping("/produits")
-	public Produit createProduit(@Validated @RequestBody(required = false) Produit produit) {
-		return produitDao.saveProduit(produit);
+	@PostMapping("/utilisateurs")
+	public Utilisateur createUtilisateur(@Validated @RequestBody(required = false) Utilisateur utilisateur) {
+		return utilisateurDao.saveUtilisateur(utilisateur);
 		
 	}
 	
-	@GetMapping("/produits/{idProduit}")
-	public ResponseEntity findProduitById(@PathVariable(name = "idProduit")Long idProduit){
-		if (idProduit == null) {
-			return ResponseEntity.badRequest().body("Je ne trouve pas le produit avec son ID");
+	@GetMapping("/utilisateurs/{id_utilisateur}")
+	public ResponseEntity findUtilisateurById(@PathVariable(name = "id_utilisateur")Long id_utilisateur){
+		if (id_utilisateur == null) {
+			return ResponseEntity.badRequest().body("Je ne trouve pas l'utilisateur avec son ID");
 		}
 		
-		Produit produit = produitDao.getProduitByID(idProduit);
+		Utilisateur utilisateur = utilisateurDao.getUtilisateurByID(id_utilisateur);
 		
-		if (produit == null) {
-			return ResponseEntity.notFound().build();
+		if (utilisateur == null) {
+			return ResponseEntity.notFound().build(); 
 		}
 		
-		return ResponseEntity.ok().body(produit); 
+		return ResponseEntity.ok().body(utilisateur); 
 		
 	}
 	
-	@PutMapping("/produits/{idProduit}")
-	public ResponseEntity<Produit> updateProduit (@Validated @PathVariable(name = "idProduit")Long idProduit, @RequestBody(required = false) Produit produit) {
-		if (produit == null) {
+	@PutMapping("/utilisateurs/{id_utilisateur}")
+	public ResponseEntity<Utilisateur> updateUtilisateur (@Validated @PathVariable(name = "id_utilisateur")Long id_utilisateur, @RequestBody(required = false) Utilisateur utilisateur) {
+		if (utilisateur == null) {
 			return ResponseEntity.notFound().build();
 			
 		}
-		produit.setIdProduit(idProduit);
-		produitDao.updateProduit(produit);
-		return ResponseEntity.ok().body(produit);
+		utilisateur.setId_utilisateur(id_utilisateur);
+		utilisateurDao.updateUtilisateur(utilisateur);
+		return ResponseEntity.ok().body(utilisateur);
 	}
 	
-	@DeleteMapping("/produits/{idProduit}")
-	public ResponseEntity<Produit> deleteProduit (@Validated @PathVariable(name = "idProduit")Long idProduit) {
+	@DeleteMapping("/utilisateurs/{id_utilisateur}")
+	public ResponseEntity<Utilisateur> deleteUtilisateur (@Validated @PathVariable(name = "id_utilisateur")Long id_utilisateur) {
 		
-		Produit produit = produitDao.getProduitByID(idProduit);
+		Utilisateur utilisateur = utilisateurDao.getUtilisateurByID(id_utilisateur);
 		
-		if (produit == null) {
+		if (utilisateur == null) {
 			return ResponseEntity.notFound().build();
 		
 	}
-		produitDao.deleteProduit(produit);
-		return ResponseEntity.ok().body(produit); 
+		utilisateurDao.deleteUtilisateur(utilisateur);
+		return ResponseEntity.ok().body(utilisateur); 
 	
 	}
 	

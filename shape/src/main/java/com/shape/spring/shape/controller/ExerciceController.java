@@ -16,8 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.shape.spring.shape.dao.ExerciceDao;
-import com.xprod.spring.xprod.dao.ProduitDao;
-import com.xprod.spring.xprod.domain.Produit;
+import com.shape.spring.shape.domain.Exercice;
 
 @RestController
 @RequestMapping
@@ -27,56 +26,56 @@ public class ExerciceController {
 	@Autowired
 	ExerciceDao exerciceDao;
 	
-	@GetMapping("/produits")
-	public List<Produit> getAllProduits(@Validated @RequestBody(required = false) Produit produit) {
-		return produitDao.getProduits();
+	@GetMapping("/exercices")
+	public List<Exercice> getAllExercices(@Validated @RequestBody(required = false) Exercice exercice) {
+		return exerciceDao.getExercices();
 		
 	}
 	
-	@PostMapping("/produits")
-	public Produit createProduit(@Validated @RequestBody(required = false) Produit produit) {
-		return produitDao.saveProduit(produit);
+	@PostMapping("/exercices")
+	public Exercice createExercice(@Validated @RequestBody(required = false) Exercice exercice) {
+		return exerciceDao.saveExercice(exercice);
 		
 	}
 	
-	@GetMapping("/produits/{idProduit}")
-	public ResponseEntity findProduitById(@PathVariable(name = "idProduit")Long idProduit){
-		if (idProduit == null) {
-			return ResponseEntity.badRequest().body("Je ne trouve pas le produit avec son ID");
+	@GetMapping("/exercices/{id_exercice}")
+	public ResponseEntity findExerciceById(@PathVariable(name = "id_exercice")Long id_exercice){
+		if (id_exercice == null) {
+			return ResponseEntity.badRequest().body("Je ne trouve pas l'exercice avec son ID");
 		}
 		
-		Produit produit = produitDao.getProduitByID(idProduit);
+		Exercice exercice = exerciceDao.getExerciceByID(id_exercice);
 		
-		if (produit == null) {
-			return ResponseEntity.notFound().build();
+		if (exercice == null) {
+			return ResponseEntity.notFound().build(); 
 		}
 		
-		return ResponseEntity.ok().body(produit); 
+		return ResponseEntity.ok().body(exercice); 
 		
 	}
 	
-	@PutMapping("/produits/{idProduit}")
-	public ResponseEntity<Produit> updateProduit (@Validated @PathVariable(name = "idProduit")Long idProduit, @RequestBody(required = false) Produit produit) {
-		if (produit == null) {
+	@PutMapping("/exercices/{id_exercice}")
+	public ResponseEntity<Exercice> updateExercice (@Validated @PathVariable(name = "id_exercice")Long id_exercice, @RequestBody(required = false) Exercice exercice) {
+		if (exercice == null) {
 			return ResponseEntity.notFound().build();
 			
 		}
-		produit.setIdProduit(idProduit);
-		produitDao.updateProduit(produit);
-		return ResponseEntity.ok().body(produit);
+		exercice.setId_exercice(id_exercice);
+		exerciceDao.updateExercice(exercice);
+		return ResponseEntity.ok().body(exercice);
 	}
 	
-	@DeleteMapping("/produits/{idProduit}")
-	public ResponseEntity<Produit> deleteProduit (@Validated @PathVariable(name = "idProduit")Long idProduit) {
+	@DeleteMapping("/exercices/{id_exercice}")
+	public ResponseEntity<Exercice> deleteExercice (@Validated @PathVariable(name = "id_exercice")Long id_exercice) {
 		
-		Produit produit = produitDao.getProduitByID(idProduit);
+		Exercice exercice = exerciceDao.getExerciceByID(id_exercice);
 		
-		if (produit == null) {
+		if (exercice == null) {
 			return ResponseEntity.notFound().build();
 		
 	}
-		produitDao.deleteProduit(produit);
-		return ResponseEntity.ok().body(produit); 
+		exerciceDao.deleteExercice(exercice);
+		return ResponseEntity.ok().body(exercice); 
 	
 	}
 	

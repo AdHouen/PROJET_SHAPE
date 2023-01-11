@@ -2,6 +2,7 @@ package com.shape.spring.shape.domain;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -14,6 +15,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -32,9 +35,21 @@ public class Entrainement implements Serializable{
 	
 	// ASSOCIATION
 	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_utilisateur")
+	private Utilisateur utilisateur;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_programme")
+	private Programme programme;
+	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(name = "Entrainement_Exercice", joinColumns = @JoinColumn(name = "id_entrainement"), inverseJoinColumns = @JoinColumn(name = "id_exercice"))
 	private List<Exercice> exercices;
+	
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinTable(name = "Entrainement_ExercicePerso", joinColumns = @JoinColumn(name = "id_entrainement"), inverseJoinColumns = @JoinColumn(name = "id_exercicePerso"))
+	private List<ExercicePerso> exercicePersos = new ArrayList<>();
 	
 	//GETTER
 
@@ -52,6 +67,18 @@ public class Entrainement implements Serializable{
 
 	public List<Exercice> getExercices() {
 		return exercices;
+	}
+	
+	public List<ExercicePerso> getExercicePersos() {
+		return exercicePersos;
+	}
+	
+	public Programme getProgramme() {
+		return programme;
+	}
+	
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
 	}
 	
 	//SETTER
@@ -72,6 +99,18 @@ public class Entrainement implements Serializable{
 		this.exercices = exercices;
 	}
 	
+	public void setExercicePersos(List<ExercicePerso> exercicePersos) {
+		this.exercicePersos = exercicePersos;
+	}
+	
+	public void setProgramme(Programme programme) {
+		this.programme = programme;
+	}
+	
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
+	}
+	
 	// CONSTRUCTEUR
 
 	public Entrainement() {
@@ -79,13 +118,33 @@ public class Entrainement implements Serializable{
 	}
 
 	public Entrainement(Long id_entrainement, LocalDate entrainement_date, String entrainement_nom,
-			List<Exercice> exercices) {
+			Utilisateur utilisateur, Programme programme, List<Exercice> exercices,
+			List<ExercicePerso> exercicePersos) {
 		super();
 		this.id_entrainement = id_entrainement;
 		this.entrainement_date = entrainement_date;
 		this.entrainement_nom = entrainement_nom;
+		this.utilisateur = utilisateur;
+		this.programme = programme;
 		this.exercices = exercices;
+		this.exercicePersos = exercicePersos;
 	}
+
+	
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
 	
 	
 	

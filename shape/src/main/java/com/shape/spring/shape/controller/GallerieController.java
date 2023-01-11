@@ -15,8 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.xprod.spring.xprod.dao.ProduitDao;
-import com.xprod.spring.xprod.domain.Produit;
+import com.shape.spring.shape.dao.GallerieDao;
+import com.shape.spring.shape.domain.Gallerie;
+
 
 @RestController
 @RequestMapping
@@ -26,56 +27,56 @@ public class GallerieController {
 	@Autowired
 	GallerieDao gallerieDao;
 	
-	@GetMapping("/produits")
-	public List<Produit> getAllProduits(@Validated @RequestBody(required = false) Produit produit) {
-		return produitDao.getProduits();
+	@GetMapping("/galleries") 
+	public List<Gallerie> getAllGalleries(@Validated @RequestBody(required = false) Gallerie gallerie) {
+		return gallerieDao.getGalleries();
 		
 	}
 	
-	@PostMapping("/produits")
-	public Produit createProduit(@Validated @RequestBody(required = false) Produit produit) {
-		return produitDao.saveProduit(produit);
+	@PostMapping("/galleries")
+	public Gallerie createGallerie(@Validated @RequestBody(required = false) Gallerie gallerie) {
+		return gallerieDao.saveGallerie(gallerie);
 		
 	}
 	
-	@GetMapping("/produits/{idProduit}")
-	public ResponseEntity findProduitById(@PathVariable(name = "idProduit")Long idProduit){
-		if (idProduit == null) {
-			return ResponseEntity.badRequest().body("Je ne trouve pas le produit avec son ID");
+	@GetMapping("/galleries/{id_gallerie}")
+	public ResponseEntity findGallerieById(@PathVariable(name = "id_gallerie")Long id_gallerie){
+		if (id_gallerie == null) {
+			return ResponseEntity.badRequest().body("Je ne trouve pas la gallerie avec son ID");
 		}
 		
-		Produit produit = produitDao.getProduitByID(idProduit);
+		Gallerie gallerie = gallerieDao.getGallerieByID(id_gallerie);
 		
-		if (produit == null) {
-			return ResponseEntity.notFound().build();
+		if (gallerie == null) {
+			return ResponseEntity.notFound().build(); 
 		}
 		
-		return ResponseEntity.ok().body(produit); 
+		return ResponseEntity.ok().body(gallerie); 
 		
 	}
 	
-	@PutMapping("/produits/{idProduit}")
-	public ResponseEntity<Produit> updateProduit (@Validated @PathVariable(name = "idProduit")Long idProduit, @RequestBody(required = false) Produit produit) {
-		if (produit == null) {
+	@PutMapping("/galleries/{id_gallerie}")
+	public ResponseEntity<Gallerie> updateGallerie (@Validated @PathVariable(name = "id_gallerie")Long id_gallerie, @RequestBody(required = false) Gallerie gallerie) {
+		if (gallerie == null) {
 			return ResponseEntity.notFound().build();
 			
 		}
-		produit.setIdProduit(idProduit);
-		produitDao.updateProduit(produit);
-		return ResponseEntity.ok().body(produit);
+		gallerie.setId_gallerie(id_gallerie);
+		gallerieDao.updateGallerie(gallerie);
+		return ResponseEntity.ok().body(gallerie);
 	}
 	
-	@DeleteMapping("/produits/{idProduit}")
-	public ResponseEntity<Produit> deleteProduit (@Validated @PathVariable(name = "idProduit")Long idProduit) {
+	@DeleteMapping("/galleries/{id_gallerie}")
+	public ResponseEntity<Gallerie> deleteGallerie (@Validated @PathVariable(name = "id_gallerie")Long id_gallerie) {
 		
-		Produit produit = produitDao.getProduitByID(idProduit);
+		Gallerie gallerie = gallerieDao.getGallerieByID(id_gallerie);
 		
-		if (produit == null) {
+		if (gallerie == null) {
 			return ResponseEntity.notFound().build();
 		
 	}
-		produitDao.deleteProduit(produit);
-		return ResponseEntity.ok().body(produit); 
+		gallerieDao.deleteGallerie(gallerie);
+		return ResponseEntity.ok().body(gallerie); 
 	
 	}
 	

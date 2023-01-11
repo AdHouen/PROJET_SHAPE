@@ -16,8 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.shape.spring.shape.dao.AbonnementDao;
-import com.xprod.spring.xprod.dao.ProduitDao;
-import com.xprod.spring.xprod.domain.Produit;
+import com.shape.spring.shape.domain.Abonnement;
 
 @RestController
 @RequestMapping
@@ -27,56 +26,56 @@ public class AbonnementController {
 	@Autowired
 	AbonnementDao abonnementDao;
 	
-	@GetMapping("/produits")
-	public List<Produit> getAllProduits(@Validated @RequestBody(required = false) Produit produit) {
-		return produitDao.getProduits();
+	@GetMapping("/abonnements")
+	public List<Abonnement> getAllAbonnements(@Validated @RequestBody(required = false) Abonnement abonnement) {
+		return abonnementDao.getAbonnements();
 		
 	}
 	
-	@PostMapping("/produits")
-	public Produit createProduit(@Validated @RequestBody(required = false) Produit produit) {
-		return produitDao.saveProduit(produit);
+	@PostMapping("/abonnements")
+	public Abonnement createAbonnement(@Validated @RequestBody(required = false) Abonnement abonnement) {
+		return abonnementDao.saveAbonnement(abonnement);
 		
 	}
 	
-	@GetMapping("/produits/{idProduit}")
-	public ResponseEntity findProduitById(@PathVariable(name = "idProduit")Long idProduit){
-		if (idProduit == null) {
-			return ResponseEntity.badRequest().body("Je ne trouve pas le produit avec son ID");
+	@GetMapping("/abonnements/{id_abonnement}")
+	public ResponseEntity findAbonnementById(@PathVariable(name = "id_abonnement")Long id_abonnement){
+		if (id_abonnement == null) {
+			return ResponseEntity.badRequest().body("Je ne trouve pas l'abonnement avec son ID");
 		}
 		
-		Produit produit = produitDao.getProduitByID(idProduit);
+		Abonnement abonnement = abonnementDao.getAbonnementByID(id_abonnement);
 		
-		if (produit == null) {
-			return ResponseEntity.notFound().build();
+		if (abonnement == null) {
+			return ResponseEntity.notFound().build(); 
 		}
 		
-		return ResponseEntity.ok().body(produit); 
+		return ResponseEntity.ok().body(abonnement); 
 		
 	}
 	
-	@PutMapping("/produits/{idProduit}")
-	public ResponseEntity<Produit> updateProduit (@Validated @PathVariable(name = "idProduit")Long idProduit, @RequestBody(required = false) Produit produit) {
-		if (produit == null) {
+	@PutMapping("/abonnements/{id_abonnement}")
+	public ResponseEntity<Abonnement> updateAbonnement (@Validated @PathVariable(name = "id_abonnement")Long id_abonnement, @RequestBody(required = false) Abonnement abonnement) {
+		if (abonnement == null) {
 			return ResponseEntity.notFound().build();
 			
 		}
-		produit.setIdProduit(idProduit);
-		produitDao.updateProduit(produit);
-		return ResponseEntity.ok().body(produit);
+		abonnement.setId_abonnement(id_abonnement);
+		abonnementDao.updateAbonnement(abonnement);
+		return ResponseEntity.ok().body(abonnement);
 	}
 	
-	@DeleteMapping("/produits/{idProduit}")
-	public ResponseEntity<Produit> deleteProduit (@Validated @PathVariable(name = "idProduit")Long idProduit) {
+	@DeleteMapping("/abonnements/{id_abonnement}")
+	public ResponseEntity<Abonnement> deleteAbonnement (@Validated @PathVariable(name = "id_abonnement")Long id_abonnement) {
 		
-		Produit produit = produitDao.getProduitByID(idProduit);
+		Abonnement abonnement = abonnementDao.getAbonnementByID(id_abonnement);
 		
-		if (produit == null) {
+		if (abonnement == null) {
 			return ResponseEntity.notFound().build();
 		
 	}
-		produitDao.deleteProduit(produit);
-		return ResponseEntity.ok().body(produit); 
+		abonnementDao.deleteAbonnement(abonnement);
+		return ResponseEntity.ok().body(abonnement); 
 	
 	}
 	

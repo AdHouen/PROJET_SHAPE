@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.shape.spring.shape.dao.MesureDao;
-import com.xprod.spring.xprod.dao.ProduitDao;
-import com.xprod.spring.xprod.domain.Produit;
+import com.shape.spring.shape.domain.Mesure;
+
 
 @RestController
 @RequestMapping
@@ -27,56 +27,56 @@ public class MesureController {
 	@Autowired
 	MesureDao mesureDao;
 	
-	@GetMapping("/produits")
-	public List<Produit> getAllProduits(@Validated @RequestBody(required = false) Produit produit) {
-		return produitDao.getProduits();
+	@GetMapping("/mesures")
+	public List<Mesure> getAllMesures(@Validated @RequestBody(required = false) Mesure mesure) {
+		return mesureDao.getMesures();
 		
 	}
 	
-	@PostMapping("/produits")
-	public Produit createProduit(@Validated @RequestBody(required = false) Produit produit) {
-		return produitDao.saveProduit(produit);
+	@PostMapping("/mesures")
+	public Mesure createMesure(@Validated @RequestBody(required = false) Mesure mesure) {
+		return mesureDao.saveMesure(mesure);
 		
 	}
 	
-	@GetMapping("/produits/{idProduit}")
-	public ResponseEntity findProduitById(@PathVariable(name = "idProduit")Long idProduit){
-		if (idProduit == null) {
-			return ResponseEntity.badRequest().body("Je ne trouve pas le produit avec son ID");
+	@GetMapping("/mesures/{id_mesure}")
+	public ResponseEntity findMesureById(@PathVariable(name = "id_mesure")Long id_mesure){
+		if (id_mesure == null) {
+			return ResponseEntity.badRequest().body("Je ne trouve pas la mesure avec son ID");
 		}
 		
-		Produit produit = produitDao.getProduitByID(idProduit);
+		Mesure mesure = mesureDao.getMesureByID(id_mesure);
 		
-		if (produit == null) {
-			return ResponseEntity.notFound().build();
+		if (mesure == null) {
+			return ResponseEntity.notFound().build(); 
 		}
 		
-		return ResponseEntity.ok().body(produit); 
+		return ResponseEntity.ok().body(mesure); 
 		
 	}
 	
-	@PutMapping("/produits/{idProduit}")
-	public ResponseEntity<Produit> updateProduit (@Validated @PathVariable(name = "idProduit")Long idProduit, @RequestBody(required = false) Produit produit) {
-		if (produit == null) {
+	@PutMapping("/mesures/{id_mesure}")
+	public ResponseEntity<Mesure> updateMesure (@Validated @PathVariable(name = "id_mesure")Long id_mesure, @RequestBody(required = false) Mesure mesure) {
+		if (mesure == null) {
 			return ResponseEntity.notFound().build();
 			
 		}
-		produit.setIdProduit(idProduit);
-		produitDao.updateProduit(produit);
-		return ResponseEntity.ok().body(produit);
+		mesure.setId_mesure(id_mesure);
+		mesureDao.updateMesure(mesure);
+		return ResponseEntity.ok().body(mesure);
 	}
 	
-	@DeleteMapping("/produits/{idProduit}")
-	public ResponseEntity<Produit> deleteProduit (@Validated @PathVariable(name = "idProduit")Long idProduit) {
+	@DeleteMapping("/mesures/{id_mesure}")
+	public ResponseEntity<Mesure> deleteMesure (@Validated @PathVariable(name = "id_mesure")Long id_mesure) {
 		
-		Produit produit = produitDao.getProduitByID(idProduit);
+		Mesure mesure = mesureDao.getMesureByID(id_mesure);
 		
-		if (produit == null) {
+		if (mesure == null) {
 			return ResponseEntity.notFound().build();
 		
 	}
-		produitDao.deleteProduit(produit);
-		return ResponseEntity.ok().body(produit); 
+		mesureDao.deleteMesure(mesure);
+		return ResponseEntity.ok().body(mesure); 
 	
 	}
 	

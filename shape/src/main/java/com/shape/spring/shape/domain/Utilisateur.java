@@ -2,16 +2,12 @@ package com.shape.spring.shape.domain;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -40,16 +36,6 @@ public class Utilisateur  implements Serializable{
 	@Column(name = "GENRE_UTILISATEUR")
 	private String utilisateur_genre;
 	
-	//ASSOCIATION
-	
-	@OneToMany(mappedBy = "id_utilisateur", fetch = FetchType.LAZY)
-	private List<Gallerie> galleries = new ArrayList<>();
-	
-	@OneToMany(mappedBy = "id_entrainement", fetch = FetchType.LAZY)
-	private List<Entrainement> entrainements = new ArrayList<>();
-	
-	@OneToMany(mappedBy = "id_mesure", fetch = FetchType.LAZY)
-	private List<Mesure> mesures  = new ArrayList<>();
 	
 	//GETTER
 	
@@ -88,20 +74,6 @@ public class Utilisateur  implements Serializable{
 	public String getUtilisateur_genre() {
 		return utilisateur_genre;
 	}
-
-	public List<Gallerie> getGalleries() {
-		return galleries;
-	}
-
-	public List<Entrainement> getEntrainements() {
-		return entrainements;
-	}
-
-	public List<Mesure> getMesures() {
-		return mesures;
-	}
-	
-	
 	
 	// SETTER
 	
@@ -140,20 +112,6 @@ public class Utilisateur  implements Serializable{
 	public void setUtilisateur_genre(String utilisateur_genre) {
 		this.utilisateur_genre = utilisateur_genre;
 	}
-
-	public void setGalleries(List<Gallerie> galleries) {
-		this.galleries = galleries;
-	}
-
-	public void setEntrainements(List<Entrainement> entrainements) {
-		this.entrainements = entrainements;
-	}
-
-	public void setMesures(List<Mesure> mesures) {
-		this.mesures = mesures;
-	}
-	
-	
 	
 	// CONSTRUCTEUR
 	
@@ -163,8 +121,7 @@ public class Utilisateur  implements Serializable{
 
 	public Utilisateur(Long id_utilisateur, String utilisateur_nom, String utilisateur_prenom,
 			String utilisateur_pseudo, String utilisateur_email, LocalDate utilisateur_dateDeNaissance,
-			String utilisateur_password, String utilisateur_photo, String utilisateur_genre, List<Gallerie> galleries,
-			List<Entrainement> entrainements, List<Mesure> mesures) {
+			String utilisateur_password, String utilisateur_photo, String utilisateur_genre) {
 		super();
 		this.id_utilisateur = id_utilisateur;
 		this.utilisateur_nom = utilisateur_nom;
@@ -175,10 +132,8 @@ public class Utilisateur  implements Serializable{
 		this.utilisateur_password = utilisateur_password;
 		this.utilisateur_photo = utilisateur_photo;
 		this.utilisateur_genre = utilisateur_genre;
-		this.galleries = galleries;
-		this.entrainements = entrainements;
-		this.mesures = mesures;
 	}
+
 	
 	
 	
