@@ -1,6 +1,7 @@
 package com.shape.spring.shape.domain;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -22,6 +23,10 @@ public class Abonnement implements Serializable {
 	private Long id_abonnement;
 	@Column(name = "ABONNEMENT_TYPE")
 	private String abonnement_type;
+	@Column(name = "ABONNEMENT_dateSouscription")
+	private LocalDate abonnement_dateSouscription;
+	@Column(name = "ABONNEMENT_DUREE")
+	private int abonnement_int;
 	
 	//ASSOCIATION
 	
@@ -42,6 +47,13 @@ public class Abonnement implements Serializable {
 		return utilisateur;
 	}
 	
+	public LocalDate getAbonnement_dateSouscription() {
+		return abonnement_dateSouscription;
+	}
+	public int getAbonnement_int() {
+		return abonnement_int;
+	}
+	
 	// SETTER
 	
 	public void setId_abonnement(Long id_abonnement) {
@@ -55,17 +67,31 @@ public class Abonnement implements Serializable {
 		this.utilisateur = utilisateur;
 	}
 	
+	public void setAbonnement_dateSouscription(LocalDate abonnement_dateSouscription) {
+		this.abonnement_dateSouscription = abonnement_dateSouscription;
+	}
+	public void setAbonnement_int(int abonnement_int) {
+		this.abonnement_int = abonnement_int;
+	}
+	
 	// CONSTRUCTEUR
 	
 	public Abonnement() {
 		super();
 	}
-	public Abonnement(Long id_abonnement, String abonnement_type, Utilisateur utilisateur) {
+	public Abonnement(Long id_abonnement, String abonnement_type, LocalDate abonnement_dateSouscription,
+			int abonnement_int, Utilisateur utilisateur) {
 		super();
 		this.id_abonnement = id_abonnement;
 		this.abonnement_type = abonnement_type;
+		this.abonnement_dateSouscription = abonnement_dateSouscription;
+		this.abonnement_int = abonnement_int;
 		this.utilisateur = utilisateur;
 	}
+	
+	
+	
+	
 	
 	
 	

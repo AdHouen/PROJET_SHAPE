@@ -28,7 +28,7 @@ public class ExercicePersoController {
 	ExercicePersoDao exercicePersoDao;
 	
 	@GetMapping("/exercicePersos")
-	public List<ExercicePerso> getAlExercicePersos(@Validated @RequestBody(required = false) ExercicePerso exercicePerso) {
+	public List<ExercicePerso> getAllExercicePersos(@Validated @RequestBody(required = false) ExercicePerso exercicePerso) {
 		return exercicePersoDao.getExercicePersos();
 		
 	}
@@ -39,13 +39,13 @@ public class ExercicePersoController {
 		
 	}
 	
-	@GetMapping("/exercicePersos/{id_exercicePerso}")
-	public ResponseEntity findExercicePersoById(@PathVariable(name = "id_exercicePerso")Long id_exercicePerso){
-		if (id_exercicePerso == null) {
+	@GetMapping("/exercicePersos/{id_exercice_perso}")
+	public ResponseEntity findExercicePersoById(@PathVariable(name = "id_exercice_perso")Long id_exercice_perso){
+		if (id_exercice_perso == null) {
 			return ResponseEntity.badRequest().body("Je ne trouve pas l'exercicePerso avec son ID");
 		}
 		
-		ExercicePerso exercicePerso = exercicePersoDao.getExercicePersoByID(id_exercicePerso);
+		ExercicePerso exercicePerso = exercicePersoDao.getExercicePersoByID(id_exercice_perso);
 		
 		if (exercicePerso == null) {
 			return ResponseEntity.notFound().build(); 
@@ -56,20 +56,20 @@ public class ExercicePersoController {
 	}
 	
 	@PutMapping("/exercicePersos/{id_exercicePerso}")
-	public ResponseEntity<ExercicePerso> updateExercicePerso (@Validated @PathVariable(name = "id_exercicePerso")Long id_exercicePerso, @RequestBody(required = false) ExercicePerso exercicePerso) {
+	public ResponseEntity<ExercicePerso> updateExercicePerso (@Validated @PathVariable(name = "id_exercice_perso")Long id_exercice_perso, @RequestBody(required = false) ExercicePerso exercicePerso) {
 		if (exercicePerso == null) {
 			return ResponseEntity.notFound().build();
 			
 		}
-		exercicePerso.setId_exercicePerso(id_exercicePerso);
+		exercicePerso.setId_exercice_perso(id_exercice_perso);
 		exercicePersoDao.updateExercicePerso(exercicePerso);
 		return ResponseEntity.ok().body(exercicePerso);
 	}
 	
 	@DeleteMapping("/exercicePersos/{id_exercicePerso}")
-	public ResponseEntity<ExercicePerso> deleteExercicePerso (@Validated @PathVariable(name = "id_exercicePerso")Long id_exercicePerso) {
+	public ResponseEntity<ExercicePerso> deleteExercicePerso (@Validated @PathVariable(name = "id_exercicePerso")Long id_exercice_perso) {
 		
-		ExercicePerso exercicePerso = exercicePersoDao.getExercicePersoByID(id_exercicePerso);
+		ExercicePerso exercicePerso = exercicePersoDao.getExercicePersoByID(id_exercice_perso);
 		
 		if (exercicePerso == null) {
 			return ResponseEntity.notFound().build();

@@ -34,6 +34,10 @@ public class Mesure implements Serializable{
 	@JoinColumn(name = "id_utilisateur")
 	private Utilisateur utilisateur;
 	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_mensuration")
+	private Mensuration mensuration;
+	
 	//GETTER
 
 	public Long getId_mesure() {
@@ -52,6 +56,10 @@ public class Mesure implements Serializable{
 		return utilisateur;
 	}
 	
+	public Mensuration getMensuration() {
+		return mensuration;
+	}
+			
 	//SETTER
 	
 	public void setId_mesure(Long id_mesure) {
@@ -70,19 +78,37 @@ public class Mesure implements Serializable{
 		this.utilisateur = utilisateur;
 	}
 	
+	public void setMensuration(Mensuration mensuration) {
+		this.mensuration = mensuration;
+	}
+	
 	//CONSTRUCTEUR
 	
 	public Mesure() {
 		super();
 	}
 
-	public Mesure(Long id_mesure, LocalDate mesure_date, float mesure_valeur, Utilisateur utilisateur) {
+	public Mesure(Long id_mesure, LocalDate mesure_date, float mesure_valeur, Utilisateur utilisateur,
+			Mensuration mensuration) {
 		super();
 		this.id_mesure = id_mesure;
 		this.mesure_date = mesure_date;
 		this.mesure_valeur = mesure_valeur;
 		this.utilisateur = utilisateur;
+		this.mensuration = mensuration;
 	}
+
+	
+
+	
+
+	
+	
+	
+
+	
+
+	
 
 	
 	

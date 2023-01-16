@@ -19,22 +19,26 @@ public class Utilisateur  implements Serializable{
 	@Column(name = "UTILISATEUR_ID")
 	private Long id_utilisateur;
 	
-	@Column(name = "NOM_UTILISATEUR")
+	@Column(name = "UTILISATEUR_NOM")
 	private String utilisateur_nom;
-	@Column(name = "PRENOM_UTILISATEUR")
+	@Column(name = "UTILISATEUR_PRENOM")
 	private String utilisateur_prenom;
-	@Column(name = "PSEUDO_UTILISATEUR")
+	@Column(name = "UTILISATEUR_PSEUDO")
 	private String utilisateur_pseudo;
-	@Column(name = "EMAIL_UTILISATEUR")
+	@Column(name = "UTILISATEUR_EMAIL")
 	private String utilisateur_email;
-	@Column(name = "DATEDENAISSANCE_UTILISATEUR")
+	@Column(name = "UTILISATEUR_DATEDENAISSANCE")
 	private LocalDate utilisateur_dateDeNaissance;
-	@Column(name = "PASSWORD_UTILISATEUR")
+	@Column(name = "UTILISATEUR_PASSWORD")
 	private String utilisateur_password;
-	@Column(name = "PHOTO_Utilisateur")
+	@Column(name = "Utilisateur_PHOTO")
 	private String utilisateur_photo;
-	@Column(name = "GENRE_UTILISATEUR")
-	private String utilisateur_genre;
+	@Column(name = "UTILISATEUR_GENRE")
+	private char utilisateur_genre;
+	@Column(name = "UTILISATEUR_DATESOUSCRIPTION_FIN")
+	private LocalDate utilisateur_dateSouscriptionFin;
+	
+	
 	
 	
 	//GETTER
@@ -70,10 +74,16 @@ public class Utilisateur  implements Serializable{
 	public String getUtilisateur_photo() {
 		return utilisateur_photo;
 	}
-
-	public String getUtilisateur_genre() {
+	
+	public char getUtilisateur_genre() {
 		return utilisateur_genre;
 	}
+
+	public LocalDate getUtilisateur_dateSouscriptionFin() {
+		return utilisateur_dateSouscriptionFin;
+	}
+
+	
 	
 	// SETTER
 	
@@ -108,10 +118,16 @@ public class Utilisateur  implements Serializable{
 	public void setUtilisateur_photo(String utilisateur_photo) {
 		this.utilisateur_photo = utilisateur_photo;
 	}
-
-	public void setUtilisateur_genre(String utilisateur_genre) {
+	
+	public void setUtilisateur_genre(char utilisateur_genre) {
 		this.utilisateur_genre = utilisateur_genre;
 	}
+
+	public void setUtilisateur_dateSouscriptionFin(LocalDate utilisateur_dateSouscriptionFin) {
+		this.utilisateur_dateSouscriptionFin = utilisateur_dateSouscriptionFin;
+	}
+
+	
 	
 	// CONSTRUCTEUR
 	
@@ -121,7 +137,8 @@ public class Utilisateur  implements Serializable{
 
 	public Utilisateur(Long id_utilisateur, String utilisateur_nom, String utilisateur_prenom,
 			String utilisateur_pseudo, String utilisateur_email, LocalDate utilisateur_dateDeNaissance,
-			String utilisateur_password, String utilisateur_photo, String utilisateur_genre) {
+			String utilisateur_password, String utilisateur_photo, char utilisateur_genre,
+			LocalDate utilisateur_dateSouscriptionFin) {
 		super();
 		this.id_utilisateur = id_utilisateur;
 		this.utilisateur_nom = utilisateur_nom;
@@ -132,7 +149,14 @@ public class Utilisateur  implements Serializable{
 		this.utilisateur_password = utilisateur_password;
 		this.utilisateur_photo = utilisateur_photo;
 		this.utilisateur_genre = utilisateur_genre;
+		this.utilisateur_dateSouscriptionFin = utilisateur_dateSouscriptionFin;
 	}
+
+	
+
+	
+
+	
 
 	
 	

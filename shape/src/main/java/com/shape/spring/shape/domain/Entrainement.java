@@ -2,8 +2,10 @@ package com.shape.spring.shape.domain;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -21,6 +23,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name="ENTRAINEMENT")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id_entrainement")
 public class Entrainement implements Serializable{
 	
 	@Id 
@@ -44,12 +47,12 @@ public class Entrainement implements Serializable{
 	private Programme programme;
 	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinTable(name = "Entrainement_Exercice", joinColumns = @JoinColumn(name = "id_entrainement"), inverseJoinColumns = @JoinColumn(name = "id_exercice"))
+	@JoinTable(name = "entrainement_exercice", joinColumns = @JoinColumn(name = "id_entrainement"), inverseJoinColumns = @JoinColumn(name = "id_exercice"))
 	private List<Exercice> exercices;
 	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinTable(name = "Entrainement_ExercicePerso", joinColumns = @JoinColumn(name = "id_entrainement"), inverseJoinColumns = @JoinColumn(name = "id_exercicePerso"))
-	private List<ExercicePerso> exercicePersos = new ArrayList<>();
+	@JoinTable(name = "entrainement_exercice_perso", joinColumns = @JoinColumn(name = "id_entrainement"), inverseJoinColumns = @JoinColumn(name = "id_exercice_perso"))
+	private List<ExercicePerso> exercicePersos;
 	
 	//GETTER
 
@@ -80,6 +83,7 @@ public class Entrainement implements Serializable{
 	public Utilisateur getUtilisateur() {
 		return utilisateur;
 	}
+	
 	
 	//SETTER
 
@@ -129,6 +133,8 @@ public class Entrainement implements Serializable{
 		this.exercices = exercices;
 		this.exercicePersos = exercicePersos;
 	}
+
+	
 
 	
 	

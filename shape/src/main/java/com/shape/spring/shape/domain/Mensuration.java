@@ -1,16 +1,12 @@
 package com.shape.spring.shape.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 
@@ -28,10 +24,6 @@ public class Mensuration implements Serializable{
 	@Column(name = "MENSURATION_UNITE")
 	private String mensuration_unite;
 	
-	//ASSOCIATION
-	
-	@OneToMany(mappedBy = "id_mensuration", fetch = FetchType.LAZY)
-	private List<Mesure> mesures = new ArrayList<>();	
 	//GETTER 
 	
 	public Long getId_mensuration() {
@@ -46,11 +38,6 @@ public class Mensuration implements Serializable{
 		return mensuration_unite;
 	}
 	
-	public List<Mesure> getMesures() {
-		return mesures;
-	}
-
-		
 	//SETTER
 	
 	public void setId_mensuration(Long id_mensuration) {
@@ -65,24 +52,19 @@ public class Mensuration implements Serializable{
 		this.mensuration_unite = mensuration_unite;
 	}
 	
-	public void setMesures(List<Mesure> mesures) {
-		this.mesures = mesures;
-	}
-
-		
 	//CONSTRUCTEUR
 	
 	public Mensuration() {
 		super();
 	}
 
-	public Mensuration(Long id_mensuration, String mensuration_nom, String mensuration_unite, List<Mesure> mesures) {
+	public Mensuration(Long id_mensuration, String mensuration_nom, String mensuration_unite) {
 		super();
 		this.id_mensuration = id_mensuration;
 		this.mensuration_nom = mensuration_nom;
 		this.mensuration_unite = mensuration_unite;
-		this.mesures = mesures;
 	}
+
 	
 	
 

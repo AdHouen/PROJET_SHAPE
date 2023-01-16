@@ -26,8 +26,8 @@ public class ExercicePersoDao {
 	}
 	
 	// get un ExercicePerso by ID
-	public ExercicePerso getExercicePersoByID(Long id_exercicePerso) {
-		return exercicePersoRepository.findById(id_exercicePerso).get();
+	public ExercicePerso getExercicePersoByID(Long id_exercice_perso) {
+		return exercicePersoRepository.findById(id_exercice_perso).get();
 	}
 	
 	
