@@ -7,11 +7,17 @@ import org.springframework.stereotype.Service;
 
 import com.shape.spring.shape.domain.Entrainement;
 import com.shape.spring.shape.repository.IEntrainementRepository;
+import com.shape.spring.shape.repository.IExercicePersoRepository;
+import com.shape.spring.shape.repository.IExerciceRepository;
+
+import jakarta.persistence.EntityManager;
 
 @Service
 public class EntrainementDao {
 	@Autowired
 	IEntrainementRepository entrainementRepository;
+	
+	
 	
 	// Liste de Entrainements
 	public List<Entrainement> getEntrainements() {
@@ -44,6 +50,11 @@ public class EntrainementDao {
 		return entrainementRepository.save(entrainement);
 		
 	}
+
+	
+	
+	// Assocation Entrainement et ExercicePerso
+
 	
  
 }

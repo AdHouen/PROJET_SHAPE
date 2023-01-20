@@ -2,6 +2,7 @@ package com.shape.spring.shape.domain;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -23,7 +24,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name="ENTRAINEMENT")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id_entrainement")
+// @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id_entrainement")
 public class Entrainement implements Serializable{
 	
 	@Id 
@@ -46,13 +47,18 @@ public class Entrainement implements Serializable{
 	@JoinColumn(name = "id_programme")
 	private Programme programme;
 	
+//	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//	@JoinTable(name = "entrainement_exercice", joinColumns = @JoinColumn(name = "id_entrainement"), inverseJoinColumns = @JoinColumn(name = "id_exercice"))
+//	private List<Exercice> exercices = new ArrayList<>();
+	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(name = "entrainement_exercice", joinColumns = @JoinColumn(name = "id_entrainement"), inverseJoinColumns = @JoinColumn(name = "id_exercice"))
-	private List<Exercice> exercices;
+	private List<Exercice> exercices = new ArrayList<>();
+	
 	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(name = "entrainement_exercice_perso", joinColumns = @JoinColumn(name = "id_entrainement"), inverseJoinColumns = @JoinColumn(name = "id_exercice_perso"))
-	private List<ExercicePerso> exercicePersos;
+	private List<ExercicePerso> exercicePersos = new ArrayList<>();
 	
 	//GETTER
 
@@ -133,6 +139,19 @@ public class Entrainement implements Serializable{
 		this.exercices = exercices;
 		this.exercicePersos = exercicePersos;
 	}
+
+	
+	public void ajouterEntrainementToExerciePerso(ExercicePerso exercicePerso) {
+		exercicePersos.add(exercicePerso);
+		
+	}
+
+	public void ajouterEntrainementToExercie(Exercice exercice) {
+		exercices.add(exercice);
+		
+	}
+
+	
 
 	
 

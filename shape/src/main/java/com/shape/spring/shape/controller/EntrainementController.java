@@ -2,6 +2,7 @@ package com.shape.spring.shape.controller;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -16,7 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.shape.spring.shape.dao.EntrainementDao;
+import com.shape.spring.shape.dao.ExerciceDao;
+import com.shape.spring.shape.dao.ExercicePersoDao;
 import com.shape.spring.shape.domain.Entrainement;
+import com.shape.spring.shape.domain.Exercice;
+import com.shape.spring.shape.domain.ExercicePerso;
 
 @RestController
 @RequestMapping
@@ -25,6 +30,12 @@ public class EntrainementController {
 	
 	@Autowired
 	EntrainementDao entrainementDao;
+	
+	@Autowired
+	ExercicePersoDao exercicePersoDao;
+	
+	@Autowired
+	ExerciceDao exerciceDao;
 	
 	@GetMapping("/entrainements")
 	public List<Entrainement> getAllEntrainements(@Validated @RequestBody(required = false) Entrainement entrainement) {
@@ -79,5 +90,21 @@ public class EntrainementController {
 	
 	}
 	
+
+	@PostMapping("/{id_entrainement}/exercicePersos/{id_exercice_perso}")
+    public Entrainement associerEntrainementToExercicePerso(@PathVariable Long id_entrainement, @PathVariable Long id_exercice_perso){
+		Entrainement entrainement = entrainementDao.getEntrainementByID(id_entrainement);
+		ExercicePerso exercicePerso = exercicePersoDao.getExercicePersoByID(id_exercice_perso);
+		entrainement.ajouterEntrainementToExerciePerso(exercicePerso);
+		return entrainementDao.saveEntrainement(entrainement);
+    }
+	
+	@PostMapping("/{id_entrainement}/exercices/{id_exercice}")
+    public Entrainement associerEntrainementToExercice(@PathVariable Long id_entrainement, @PathVariable Long id_exercice){
+		Entrainement entrainement = entrainementDao.getEntrainementByID(id_entrainement);
+		Exercice exercice = exerciceDao.getExerciceByID(id_exercice);
+		entrainement.ajouterEntrainementToExercie(exercice);
+		return entrainementDao.saveEntrainement(entrainement);
+    }
 
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.CascadeType;
@@ -20,7 +21,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name="EXERCICEPERSO")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id_exercice_perso")
+// @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id_exercice_perso")
 public class ExercicePerso implements Serializable {
 	
 	@Id 
@@ -32,7 +33,7 @@ public class ExercicePerso implements Serializable {
 	private String exercicePerso_nom;
 	
 	// ASSOCIATION
-	
+	@JsonIgnore
 	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "exercicePersos")
 	private List<Entrainement> entrainements = new ArrayList<>();
 	
