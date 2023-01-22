@@ -34,7 +34,7 @@ public class Utilisateur  implements Serializable{
 	@Column(name = "Utilisateur_PHOTO")
 	private String utilisateur_photo;
 	@Column(name = "UTILISATEUR_GENRE")
-	private char utilisateur_genre;
+	private String utilisateur_genre;
 	@Column(name = "UTILISATEUR_DATESOUSCRIPTION_FIN")
 	private LocalDate utilisateur_dateSouscriptionFin;
 	
@@ -75,7 +75,7 @@ public class Utilisateur  implements Serializable{
 		return utilisateur_photo;
 	}
 	
-	public char getUtilisateur_genre() {
+	public String getUtilisateur_genre() {
 		return utilisateur_genre;
 	}
 
@@ -119,7 +119,7 @@ public class Utilisateur  implements Serializable{
 		this.utilisateur_photo = utilisateur_photo;
 	}
 	
-	public void setUtilisateur_genre(char utilisateur_genre) {
+	public void setUtilisateur_genre(String utilisateur_genre) {
 		this.utilisateur_genre = utilisateur_genre;
 	}
 
@@ -137,7 +137,7 @@ public class Utilisateur  implements Serializable{
 
 	public Utilisateur(Long id_utilisateur, String utilisateur_nom, String utilisateur_prenom,
 			String utilisateur_pseudo, String utilisateur_email, LocalDate utilisateur_dateDeNaissance,
-			String utilisateur_password, String utilisateur_photo, char utilisateur_genre,
+			String utilisateur_password, String utilisateur_photo, String utilisateur_genre,
 			LocalDate utilisateur_dateSouscriptionFin) {
 		super();
 		this.id_utilisateur = id_utilisateur;

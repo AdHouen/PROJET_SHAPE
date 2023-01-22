@@ -26,7 +26,7 @@ public class Abonnement implements Serializable {
 	@Column(name = "ABONNEMENT_dateSouscription")
 	private LocalDate abonnement_dateSouscription;
 	@Column(name = "ABONNEMENT_DUREE")
-	private int abonnement_int;
+	private int abonnement_duree;
 	
 	//ASSOCIATION
 	
@@ -51,7 +51,7 @@ public class Abonnement implements Serializable {
 		return abonnement_dateSouscription;
 	}
 	public int getAbonnement_int() {
-		return abonnement_int;
+		return abonnement_duree;
 	}
 	
 	// SETTER
@@ -71,7 +71,7 @@ public class Abonnement implements Serializable {
 		this.abonnement_dateSouscription = abonnement_dateSouscription;
 	}
 	public void setAbonnement_int(int abonnement_int) {
-		this.abonnement_int = abonnement_int;
+		this.abonnement_duree = abonnement_int;
 	}
 	
 	// CONSTRUCTEUR
@@ -80,12 +80,12 @@ public class Abonnement implements Serializable {
 		super();
 	}
 	public Abonnement(Long id_abonnement, String abonnement_type, LocalDate abonnement_dateSouscription,
-			int abonnement_int, Utilisateur utilisateur) {
+			int abonnement_duree, Utilisateur utilisateur) {
 		super();
 		this.id_abonnement = id_abonnement;
 		this.abonnement_type = abonnement_type;
 		this.abonnement_dateSouscription = abonnement_dateSouscription;
-		this.abonnement_int = abonnement_int;
+		this.abonnement_duree = abonnement_duree;
 		this.utilisateur = utilisateur;
 	}
 	
