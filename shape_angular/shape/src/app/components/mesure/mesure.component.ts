@@ -13,7 +13,7 @@ export class MesureComponent implements OnInit{
   declare mesures : any[];
 
   constructor (
-    private MesureService : MesureService,
+    private mesureService : MesureService,
     private router : Router
   ){
 
@@ -23,7 +23,7 @@ export class MesureComponent implements OnInit{
     this.getMensures();
   }
   getMensures() {
-    this.MesureService.findAllMesures().subscribe(
+    this.mesureService.findAllMesures().subscribe(
       data => {
         console.log(data);
         this.mesures = data as any[];

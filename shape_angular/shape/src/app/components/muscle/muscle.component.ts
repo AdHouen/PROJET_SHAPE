@@ -12,7 +12,7 @@ export class MuscleComponent implements OnInit {
   declare muscles : any[];
 
   constructor (
-    private MuscleService : MuscleService,
+    private muscleService : MuscleService,
     private router : Router
   ){
 
@@ -21,7 +21,7 @@ export class MuscleComponent implements OnInit {
     this.getMuscles();
   }
   getMuscles() {
-    this.MuscleService.findAllMuscles().subscribe(
+    this.muscleService.findAllMuscles().subscribe(
       data => {
         console.log(data);
         this.muscles = data as any[];

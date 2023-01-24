@@ -1,1 +1,46 @@
-<p>muscle works!</p>
+<!-- <div class="container ">
+  <div class="row" >
+
+    <ng-container *ngFor="let item of muscles">
+      <div class="card col-md-3">
+
+        <img src="http://localhost:8085{{item.imgProduit}}" alt="" style="width: 150px;">
+        <h5 style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: fit-content;">{{item.designationProduit}}</h5>
+        <p><strong>Prix :</strong>{{item.prixVenteUProduit|currency:"EUR"}}  </p>
+      </div>
+
+    </ng-container>
+
+  </div>
+
+</div> -->
+<div class="container">
+  <div class="container">
+    <nav class="navbar navbar-light bg-light center"></nav>
+    <h2>Liste des produits</h2>
+
+  </div>
+  <table>
+    <tr>
+      <th>ID PRODUIT</th>
+      <th> IMAGE</th>
+      <th>DESIGNATION</th>
+      <th>DESCRIPTIF</th>
+      <th>PRIX UHT</th>
+      <th>REF INTERNE</th>
+
+    </tr>
+    <tr *ngFor="let m of muscles">
+
+
+      <td>{{m.muscle_nom}}</td>
+
+
+      
+
+    </tr>
+  </table>
+</div>
+
+
+

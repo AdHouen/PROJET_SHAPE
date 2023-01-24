@@ -1,0 +1,59 @@
+/*---------------------
+  ChoseUs Section
+-----------------------*/
+
+.choseus-section {
+	background: #013348;
+	padding-bottom: 70px;
+}
+
+.cs-item {
+	text-align: center;
+	margin-bottom: 0px;
+}
+
+.cs-item:hover span {
+	background: #f36100;
+	color: #ffffff;
+}
+
+.cs-item span {
+	height: 90px;
+	width: 90px;
+	background: rgba(255, 255, 255, 0.1);
+	border-radius: 40%;
+	display: inline-block;
+	color: #f36100;
+	line-height: 90px;
+	text-align: center;
+	-webkit-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+
+.cs-item img {
+	height: 70px;
+	width: 70px;
+	background: #95efff;
+	border-radius: 10%;
+	display: inline-block;
+	color: #f36100;
+	line-height: 90px;
+	text-align: center;
+	-webkit-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+}
+.cs-item:hover img {
+	background: #95efff;
+	color: #ffffff;
+}
+
+.cs-item h4 {
+	color: #ffffff;
+	font-size: 22px;
+	font-weight: 600;
+	margin-top: 24px;
+	margin-bottom: 16px;
+}

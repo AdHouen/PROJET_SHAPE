@@ -14,6 +14,17 @@ import { EntrainementComponent } from './components/entrainement/entrainement.co
 import { ProgrammeComponent } from './components/programme/programme.component';
 import { ExerciceComponent } from './components/exercice/exercice.component';
 import { MuscleComponent } from './components/muscle/muscle.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { BmiCalculComponent } from './components/bmi-calcul/bmi-calcul.component';
+import { SearchComponent } from './components/search/search.component';
+import { CarouselComponent } from './components/carousel/carousel.component';
+import { ChooseUsComponent } from './components/choose-us/choose-us.component';
+import { GetInTouchComponent } from './components/get-in-touch/get-in-touch.component';
+import { GalleryComponent } from './components/gallery/gallery.component';
+
+
 
 
 @NgModule({
@@ -29,6 +40,17 @@ import { MuscleComponent } from './components/muscle/muscle.component';
     ProgrammeComponent,
     ExerciceComponent,
     MuscleComponent,
+    HeaderComponent,
+    FooterComponent,
+    ContactComponent,
+    BmiCalculComponent,
+    SearchComponent,
+    CarouselComponent,
+    ChooseUsComponent,
+    GetInTouchComponent,
+    GalleryComponent,
+
+
 
   ],
   imports: [
