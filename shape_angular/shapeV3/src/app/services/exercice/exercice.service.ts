@@ -7,6 +7,9 @@ import { Exercice } from 'src/app/models/exercice/exercice';
   providedIn: 'root'
 })
 export class ExerciceService {
+  findExerciceeById(listMuscle: any) {
+    throw new Error('Method not implemented.');
+  }
   httpOptions = {
     headers : new HttpHeaders ({'Content-Type' :'application/json'})
   }
@@ -17,10 +20,15 @@ export class ExerciceService {
     return this.http.get(AppSettings.APP_URL+"/exercices")
   }
 
+  findExerciceById(id_exercice:number) {
+    return this.http.get(AppSettings.APP_URL+"/exercices/"+id_exercice)
+  }
+
   saveExercice(exercice:Exercice){
     return this.http.post(AppSettings.APP_URL+"/exercices", JSON.stringify(exercice),this.httpOptions);
 
   }
+
 
   editExercice(id_exercice:number) {
     return this.http.get(AppSettings.APP_URL+"/exercices/"+id_exercice)
@@ -35,5 +43,7 @@ export class ExerciceService {
     return this.http.delete(AppSettings.APP_URL+"/exercices/"+id_exercice)
 
   }
+
+
 }
 

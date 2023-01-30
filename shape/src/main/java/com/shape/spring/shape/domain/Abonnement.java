@@ -20,74 +20,93 @@ public class Abonnement implements Serializable {
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ABONNEMENT_ID")
-	private Long id_abonnement;
+	private Long abonnement_id;
 	@Column(name = "ABONNEMENT_TYPE")
 	private String abonnement_type;
 	@Column(name = "ABONNEMENT_dateSouscription")
 	private LocalDate abonnement_dateSouscription;
 	@Column(name = "ABONNEMENT_DUREE")
-	private int abonnement_duree;
+	private Long abonnement_duree;
 	
 	//ASSOCIATION
+		//Avec Utilisateur
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_utilisateur")
-	private Utilisateur utilisateur;
+	private Long utilisateur_id;
+
+
 	
 	// GETTER
 	
-	public Long getId_abonnement() {
-		return id_abonnement;
+	public Long getAbonnement_id() {
+		return abonnement_id;
 	}
+
 	public String getAbonnement_type() {
 		return abonnement_type;
 	}
-	
-	public Utilisateur getUtilisateur() {
-		return utilisateur;
-	}
-	
+
 	public LocalDate getAbonnement_dateSouscription() {
 		return abonnement_dateSouscription;
 	}
-	public int getAbonnement_int() {
+
+	public Long getAbonnement_duree() {
 		return abonnement_duree;
 	}
+
+	public Long getUtilisateur_id() {
+		return utilisateur_id;
+	}
+	
 	
 	// SETTER
 	
-	public void setId_abonnement(Long id_abonnement) {
-		this.id_abonnement = id_abonnement;
+	public void setAbonnement_id(Long abonnement_id) {
+		this.abonnement_id = abonnement_id;
 	}
+
 	public void setAbonnement_type(String abonnement_type) {
 		this.abonnement_type = abonnement_type;
 	}
-	
-	public void setUtilisateur(Utilisateur utilisateur) {
-		this.utilisateur = utilisateur;
-	}
-	
+
 	public void setAbonnement_dateSouscription(LocalDate abonnement_dateSouscription) {
 		this.abonnement_dateSouscription = abonnement_dateSouscription;
 	}
-	public void setAbonnement_int(int abonnement_int) {
-		this.abonnement_duree = abonnement_int;
+
+	public void setAbonnement_duree(Long abonnement_duree) {
+		this.abonnement_duree = abonnement_duree;
 	}
+
+	public void setUtilisateur_id(Long utilisateur_id) {
+		this.utilisateur_id = utilisateur_id;
+	}
+	
+	
+	
 	
 	// CONSTRUCTEUR
 	
 	public Abonnement() {
 		super();
 	}
-	public Abonnement(Long id_abonnement, String abonnement_type, LocalDate abonnement_dateSouscription,
-			int abonnement_duree, Utilisateur utilisateur) {
+
+	public Abonnement(Long abonnement_id, String abonnement_type, LocalDate abonnement_dateSouscription,
+			Long abonnement_duree, Long utilisateur_id) {
 		super();
-		this.id_abonnement = id_abonnement;
+		this.abonnement_id = abonnement_id;
 		this.abonnement_type = abonnement_type;
 		this.abonnement_dateSouscription = abonnement_dateSouscription;
 		this.abonnement_duree = abonnement_duree;
-		this.utilisateur = utilisateur;
+		this.utilisateur_id = utilisateur_id;
 	}
+	
+	
+
+	
+
+	
+	
 	
 	
 	

@@ -1,3 +1,4 @@
+import { AddProgrammeComponent } from './components/add-programme/add-programme.component';
 import { PlanningComponent } from './components/planning/planning.component';
 import { ChoseUsComponent } from './components/chose-us/chose-us.component';
 import { AccueilComponent } from './components/accueil/accueil.component';
@@ -9,13 +10,16 @@ const routes: Routes = [
     path:'accueil',
     component: AccueilComponent
 
-},{
+  },{
   path:'chooseUs',
-  component: ChoseUsComponent
-},{
+    component: ChoseUsComponent
+  },{
   path:'planning',
-  component:PlanningComponent
-}
+    component:PlanningComponent
+  },{
+    path:'programme',
+    component:AddProgrammeComponent
+  }
 
 
 ];

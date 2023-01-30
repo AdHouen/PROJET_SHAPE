@@ -18,6 +18,10 @@ export class MuscleService {
     return this.http.get(AppSettings.APP_URL+"/muscles")
   }
 
+  findMuscleById(id_muscle:number) {
+    return this.http.get(AppSettings.APP_URL+"/muscles/"+id_muscle)
+  }
+
   saveMuscle(muscle:Muscle){
     return this.http.post(AppSettings.APP_URL+"/muscles", JSON.stringify(muscle),this.httpOptions);
 
@@ -37,6 +41,8 @@ export class MuscleService {
 
   }
 
-  
+
+
+
 }
 

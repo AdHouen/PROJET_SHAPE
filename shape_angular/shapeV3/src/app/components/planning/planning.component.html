@@ -29,83 +29,140 @@
           </li>
 
       </ul>
-      <input class="btn btn-primary" type="submit" value="Enregistre ton entrainement :)">
+
 
   </div>
-  <div class="tab-content">
-    <div id="tab-1" class="tab-pane fade show p-0 active">
-      <div class="container">
 
-        <table class="table table-dark" >
-          <thead>
-            <tr>
-              <th>Zone</th>
-              <th>Exercices</th>
-              <th>Répétition</th>
-              <th>Série</th>
-              <th>Poids</th>
-              <th>Pause</th>
-              <th>Temps</th>
 
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td >
-                <select>
-                  <option *ngFor="let item of muscles" value="{{item.id_muscle}}">{{item.muscle_nom}}</option>
+
+          <form class="col s6" [formGroup]="form"(ngSubmit)="create()">
+            <td>
+              <label for="">Zone</label>
+              <select id = "listMuscle" (change)="onChange($event)">
+
+                <option default  ></option>
+
+
+
+                <option *ngFor="let item of muscles" value="{{item.id_muscle}}">{{item.muscle_nom}}</option>
 
               </select>
+              <h3>{{listMuscle}}</h3>
+
+
             </td>
             <td>
+              <label>Exercice</label>
               <select>
+
                 <option *ngFor="let item of exercices" value="{{item.id_exercice}}">{{item.exercice_nom}}</option>
-            </select>
-          </td>
-              <!-- <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Muscle
-                </button>
-                <ul class="dropdown-menu dropdown-menu-dark" >
-                  <li *ngFor="let item of muscles"><a class="dropdown-item active">{{item.muscle_nom}}</a></li>
 
-                </ul>
+              </select>
+
+            </td>
+            <td>
+
+              <div class="input-field">
+                <label>Poids</label>
+                <input id="programme_poids" type="text" formControlName="programme_poids" data-lenth ="5" value="Répétion" style="width: 150px;">
+
               </div>
-            </td>
-            <td>
-              <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Exercices
-                </button>
-                <ul class="dropdown-menu dropdown-menu-dark" >
-                  <li *ngFor="let item of exercices"><a class="dropdown-item active">{{item.exercice_nom}}</a></li>
 
-                </ul>
-              </div> -->
+            </td>
+              <td>
+                <div class="input-field">
+                  <label>Serie</label>
 
-            <td>
-              Formulaire a faire
-            </td>
-            <td>
-              Formulaire a faire
-            </td>
-            <td>
-              Formulaire a faire
-            </td>
-            <td>
-              Formulaire a faire
-            </td>
-            <td>
-              Formulaire a faire
-            </td>
+                  <input id="programme_series" type="text" formControlName="programme_series" data-lenth ="5" value="Série" style="width: 150px;">
+
+                </div>
+              </td>
+              <td>
+                <div class="input-field">
+                  <label>Répétitions</label>
+
+                  <input id="programme_repetitions" type="text" formControlName="programme_repetitions" data-lenth ="5" value="Poids" style="width: 150px;">
+
+                </div>
+
+              </td>
+              <td>
+                <div class="input-field">
+                  <label>Pause</label>
+
+                  <input id="programme_pause" type="text" formControlName="programme_pause" data-lenth ="5" value="Pause" style="width: 150px;">
+
+                </div>
+
+              </td>
+              <td>
+                <div class="input-field">
+                  <label>Temps</label>
+
+                  <input id="programme_tempsSecondes" type="text" formControlName="programme_tempsSecondes" data-lenth ="5" value="Distance" style="width: 150px;">
+
+                </div>
+
+              </td>
+              <td>
+                <div class="input-field">
+                  <label>Distance</label>
+
+                  <input id="programme_distance" type="text" formControlName="programme_distance" data-lenth ="5" value="Distance" style="width: 150px;">
+
+                </div>
+
+              </td>
+              <td>
+                <label>Confirmer </label>
+                <!-- <button type="submit"  >Valider</button> -->
+                <button class="btn btn-primary" type="submit" >Valider</button>
+
+              </td>
+
+              <!-- <div class="table-responsive">
+                <table class="table align-middle table-bordered align-middle" style="text-align: center;">
+
+                    <thead>
+                      <tr>
+                      <th>ID PRODUIT</th>
+                      <th style="width: 100px">IMAGE</th>
+                      <th style="width: 10px">DESIGNATION</th>
+                      <th style="width: 50px">DESCRIPTIF</th>
+                      <th>PRIX UHT</th>
+                      <th>REF INTERNE</th>
+                      <th style="width: 5%">AJOUTER</th>
+                      <th style="width: 5%">DELETE</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="align-bottom">
+                        <tr *ngFor="let p of programmes">
+
+                            <td style="width : 10%">{{p.programme_poids}}</td>
+                            <td style="width : 10%">{{p.programme_series}}</td>
+                            <td style="width : 10%">{{p.programme_repetitions}} €</td>
+                            <td style="width : 10%">{{p.programme_pause}}</td>
+                            <td style="width : 10%">{{p.programme_tempsSecondes}}</td>
+                            <td style="width : 10%">{{p.programme_distance}}</td>
+                            <td><a class="waves-effect wave-light btn red " routerLink="/edit/{{ p.id_programme }}"  style=" color: blue;">[Edit]</a></td>
+
+                            <td><a class="waves-effect wave-light btn red " routerLink="/produit/{{ p.id_programme }}" style="color: rgb(255, 0, 0);"> [Delete]</a></td>
+ -->
+
+                      <!-- </tr >
+
+                    </tbody>
+
+                </table>
+                </div> -->
+              <!-- <button class="btn btn-primary" type="submit" value="Ajoute un programme :)" > -->
+              <!-- <button class="btn btn-primary" type="submit" >Ajoute un programme :) </button> -->
 
 
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
 
-</div>
-</div>
-<!-- Class Timetable Start -->
+
+          </form>
+
+
+
